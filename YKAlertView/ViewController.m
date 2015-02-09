@@ -56,7 +56,7 @@
 }
 
 - (IBAction)threeAction:(id)sender {
-    YKAlertView * alter = [[YKAlertView alloc]initWithTitle:@"333" contentText:@"333333333333333333333333333333333333333333333333333333333333333333333333333333333333333" oneButtonTitle:@"点解消失" twoButtonTitle:nil threeButtonTitle:nil];
+    YKAlertView * alter = [[YKAlertView alloc]initWithTitle:@"333" contentText:@"333333333333333333333333333333333333333333333333333333333333333333333333333333333333333" oneButtonTitle:@"点解消失" twoButtonTitle:@"333" threeButtonTitle:@"333"];
     
     [alter showAlert];
     
@@ -69,4 +69,11 @@
     
 }
 
+- (IBAction)alterAction:(id)sender {
+    
+    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"haha" message:@"xixi" delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles: nil];
+    
+    [alter show];
+    
+}
 @end

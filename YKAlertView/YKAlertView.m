@@ -15,10 +15,10 @@
 #define kContentOffset 30.0f
 #define kBetweenLabelOffset 20.0f
 
-#define kSingleButtonWidth 160.0f
-#define kCoupleButtonWidth 107.0f
+#define kSingleButtonWidth 245.0f
+#define kCoupleButtonWidth 122.5f
 #define kButtonHeight 40.0f
-#define kButtonBottomOffset 10.0f
+#define kButtonBottomOffset 0.0f
 #define kButtonLineWidth 5.0f
 
 #import "YKAlertView.h"
@@ -72,7 +72,7 @@
     CGRect afterFrame = CGRectMake((CGRectGetWidth(topVC.view.bounds) - kAlertWidth) * 0.5, (CGRectGetHeight(topVC.view.bounds) - _alertHeight) * 0.5, kAlertWidth, _alertHeight);
     self.frame = afterFrame;
     
-    [UIView exChangeOut:self dur:0.35f];
+    [UIView exChangeOut:self dur:0.5f];
 }
 
 -(void)removeFromSuperview
@@ -90,7 +90,7 @@
     if (self = [super init]) {
         
         //计算alert的content所占的位置
-        CGRect rect = [content boundingRectWithSize:CGSizeMake(kAlertWidth - 16, [UIScreen mainScreen].bounds.size.height/3*2) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil];
+        CGRect rect = [content boundingRectWithSize:CGSizeMake(kAlertWidth - 16, [UIScreen mainScreen].bounds.size.height/3*2) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil];
         
         self.layer.cornerRadius = 5.0;//alertView圆角
         self.backgroundColor = [UIColor whiteColor];
@@ -98,22 +98,17 @@
         
         //alert的标题
         self.alertTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kTitleYOffset, kAlertWidth, kTitleHeight)];
-        //self.alertTitleLabel.backgroundColor = [UIColor redColor];
         self.alertTitleLabel.font = [UIFont boldSystemFontOfSize:20.0f];
-        self.alertTitleLabel.textColor = [UIColor colorWithRed:56.0/255.0 green:64.0/255.0 blue:71.0/255.0 alpha:1];
         [self addSubview:self.alertTitleLabel];
         
         //alert的内容
         CGFloat contentLabelWidth = kAlertWidth - 16;
         self.alertContentLabel = [[UILabel alloc] initWithFrame:CGRectMake((kAlertWidth - contentLabelWidth) * 0.5, CGRectGetMaxY(self.alertTitleLabel.frame), contentLabelWidth, rect.size.height)];
-        //self.alertContentLabel.backgroundColor = [UIColor greenColor];
         self.alertContentLabel.numberOfLines = 0;
         self.alertContentLabel.textAlignment = self.alertTitleLabel.textAlignment = NSTextAlignmentCenter;
-        self.alertContentLabel.textColor = [UIColor colorWithRed:127.0/255.0 green:127.0/255.0 blue:127.0/255.0 alpha:1];
-        self.alertContentLabel.font = [UIFont systemFontOfSize:16.0f];
+        self.alertContentLabel.font = [UIFont systemFontOfSize:15.0f];
         [self addSubview:self.alertContentLabel];
         
-
         
         CGRect oneButtonFrame;
         CGRect twoButtonFrame;
@@ -141,6 +136,28 @@
             self.threeButton.frame = threeButtonFrame;
             [self.threeButton addTarget:self action:@selector(threeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:self.threeButton];
+            
+            
+            //添加分割线
+            UIView * divisionLine = [[UIView alloc]init];
+            divisionLine.backgroundColor = [UIColor colorWithRed:178/255.0 green:178/255.0 blue:178/255.0 alpha:1];
+            divisionLine.frame = CGRectMake(oneButtonFrame.origin.x, oneButtonFrame.origin.y, oneButtonFrame.size.width, 0.5);
+            [self addSubview:divisionLine];
+            
+            
+            //添加分割线
+            UIView * divisionLine1 = [[UIView alloc]init];
+            divisionLine1.backgroundColor = [UIColor colorWithRed:178/255.0 green:178/255.0 blue:178/255.0 alpha:1];
+            divisionLine1.frame = CGRectMake(twoButtonFrame.origin.x, twoButtonFrame.origin.y, twoButtonFrame.size.width, 0.5);
+            [self addSubview:divisionLine1];
+            
+            
+            //添加分割线
+            UIView * divisionLine2 = [[UIView alloc]init];
+            divisionLine2.backgroundColor = [UIColor colorWithRed:178/255.0 green:178/255.0 blue:178/255.0 alpha:1];
+            divisionLine2.frame = CGRectMake(threeButtonFrame.origin.x, threeButtonFrame.origin.y, threeButtonFrame.size.width, 0.5);
+            [self addSubview:divisionLine2];
+            
         }
         else if (twoTitle&& oneTitle)
         {
@@ -149,8 +166,8 @@
             
             oneButtonFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomOffset) * 0.5, _alertHeight - kButtonBottomOffset - kButtonHeight, kCoupleButtonWidth, kButtonHeight);
             twoButtonFrame = CGRectMake(CGRectGetMaxX(oneButtonFrame) + kButtonBottomOffset, _alertHeight - kButtonBottomOffset - kButtonHeight, kCoupleButtonWidth, kButtonHeight);
-            self.oneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            self.twoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            self.oneButton = [UIButton buttonWithType:UIButtonTypeSystem];
+            self.twoButton = [UIButton buttonWithType:UIButtonTypeSystem];
             self.oneButton.frame = oneButtonFrame;
             self.twoButton.frame = twoButtonFrame;
             
@@ -160,33 +177,47 @@
             
             [self addSubview:self.oneButton];
             [self addSubview:self.twoButton];
+            
+            //添加分割线
+            UIView * divisionLine = [[UIView alloc]init];
+            divisionLine.backgroundColor = [UIColor colorWithRed:178/255.0 green:178/255.0 blue:178/255.0 alpha:1];
+            divisionLine.frame = CGRectMake(oneButtonFrame.origin.x, oneButtonFrame.origin.y, oneButtonFrame.size.width, 0.5);
+            [self addSubview:divisionLine];
+            
+            //添加分割线
+            UIView * divisionLine1 = [[UIView alloc]init];
+            divisionLine1.backgroundColor = [UIColor colorWithRed:178/255.0 green:178/255.0 blue:178/255.0 alpha:1];
+            divisionLine1.frame = CGRectMake(twoButtonFrame.origin.x, twoButtonFrame.origin.y, twoButtonFrame.size.width, 0.5);
+            [self addSubview:divisionLine1];
+            
+            //添加分割线
+            UIView * divisionLine2 = [[UIView alloc]init];
+            divisionLine2.backgroundColor = [UIColor colorWithRed:178/255.0 green:178/255.0 blue:178/255.0 alpha:1];
+            divisionLine2.frame = CGRectMake(twoButtonFrame.origin.x, twoButtonFrame.origin.y, 0.5, twoButtonFrame.size.height);
+            [self addSubview:divisionLine2];
+            
         }else
         {
             //alertHeight的计算
             _alertHeight = rect.size.height + kTitleHeight +kTitleYOffset +kButtonHeight +kButtonBottomOffset;
             
             oneButtonFrame = CGRectMake((kAlertWidth - kSingleButtonWidth) * 0.5, _alertHeight - kButtonBottomOffset - kButtonHeight, kSingleButtonWidth, kButtonHeight);
-            self.oneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            self.oneButton = [UIButton buttonWithType:UIButtonTypeSystem];
             self.oneButton.frame = oneButtonFrame;
             
             [self.oneButton addTarget:self action:@selector(oneButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:self.oneButton];
+            
+            //添加分割线
+            UIView * divisionLine = [[UIView alloc]init];
+            divisionLine.backgroundColor = [UIColor colorWithRed:178/255.0 green:178/255.0 blue:178/255.0 alpha:1];
+            divisionLine.frame = CGRectMake(oneButtonFrame.origin.x, oneButtonFrame.origin.y, oneButtonFrame.size.width, 0.5);
+            [self addSubview:divisionLine];
         }
-        
-        
-        
+
         [self.oneButton setTitle:oneTitle forState:UIControlStateNormal];
         [self.twoButton setTitle:twoTitle forState:UIControlStateNormal];
         [self.threeButton setTitle:threeTitle forState:UIControlStateNormal];
- 
-        
-        
-        [self.oneButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:87.0/255.0 green:135.0/255.0 blue:173.0/255.0 alpha:1]] forState:UIControlStateNormal];
-        [self.twoButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:87.0/255.0 green:135.0/255.0 blue:173.0/255.0 alpha:1]] forState:UIControlStateNormal];
-        [self.threeButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:87.0/255.0 green:135.0/255.0 blue:173.0/255.0 alpha:1]] forState:UIControlStateNormal];
-        
-        self.threeButton.layer.masksToBounds = self.twoButton.layer.masksToBounds = self.oneButton.layer.masksToBounds = YES;
-        self.threeButton.layer.cornerRadius =self.twoButton.layer.cornerRadius = self.oneButton.layer.cornerRadius = 3.0;
         
         self.alertTitleLabel.text = title;
         self.alertContentLabel.text = content;
