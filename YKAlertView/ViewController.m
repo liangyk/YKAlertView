@@ -28,7 +28,7 @@
 }
 
 - (IBAction)btnAction:(id)sender {
-   YKAlertView * alter = [[YKAlertView alloc]initWithTitle:@"111" contentText:@"11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111" oneButtonTitle:@"点解消失" twoButtonTitle:nil threeButtonTitle:nil];
+   YKAlertView * alter = [[YKAlertView alloc]initWithTitle:@"111" dismissBool:YES contentText:@"11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111" oneButtonTitle:@"点解消失" twoButtonTitle:nil threeButtonTitle:nil];
     
     [alter showAlert];
     
@@ -39,7 +39,7 @@
     }];
 }
 - (IBAction)twoAction:(id)sender {
-    __strong YKAlertView * alter = [[YKAlertView alloc]initWithTitle:@"2222" contentText:@"22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222" oneButtonTitle:@"点解消失" twoButtonTitle:@"点击还在" threeButtonTitle:nil];
+    __strong YKAlertView * alter = [[YKAlertView alloc]initWithTitle:@"2222" dismissBool:NO contentText:@"22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222" oneButtonTitle:@"点解消失" twoButtonTitle:@"点击还在" threeButtonTitle:nil];
     
     [alter showAlert];
     
@@ -56,7 +56,7 @@
 }
 
 - (IBAction)threeAction:(id)sender {
-    YKAlertView * alter = [[YKAlertView alloc]initWithTitle:@"333" contentText:@"333333333333333333333333333333333333333333333333333333333333333333333333333333333333333" oneButtonTitle:@"点解消失" twoButtonTitle:@"333" threeButtonTitle:@"333"];
+    YKAlertView * alter = [[YKAlertView alloc]initWithTitle:@"333" dismissBool:NO contentText:@"333333333333333333333333333333333333333333333333333333333333333333333333333333333333333" oneButtonTitle:@"点解消失" twoButtonTitle:@"333" threeButtonTitle:@"333"];
     
     [alter showAlert];
     

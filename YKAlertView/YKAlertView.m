@@ -19,7 +19,10 @@
 #define kCoupleButtonWidth 122.5f
 #define kButtonHeight 40.0f
 #define kButtonBottomOffset 0.0f
-#define kButtonLineWidth 5.0f
+#define kButtonLineWidth 0.0f
+
+#define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
+#define RGB(r, g, b) RGBA(r, g, b, 1.0f)
 
 #import "YKAlertView.h"
 
@@ -82,12 +85,16 @@
 }
 
 -(id)initWithTitle:(NSString *)title
+       dismissBool:(Boolean)boo
        contentText:(NSString *)content
     oneButtonTitle:(NSString *)oneTitle
     twoButtonTitle:(NSString *)twoTitle
   threeButtonTitle:(NSString *)threeTitle
 {
     if (self = [super init]) {
+        
+        //触发消失判断
+        self.dismissBool = boo;
         
         //计算alert的content所占的位置
         CGRect rect = [content boundingRectWithSize:CGSizeMake(kAlertWidth - 16, [UIScreen mainScreen].bounds.size.height/3*2) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil];
@@ -118,21 +125,21 @@
             _alertHeight = rect.size.height + kTitleHeight +kTitleYOffset +kButtonHeight*3 +kButtonBottomOffset + kButtonLineWidth*2;
             
             oneButtonFrame = CGRectMake((kAlertWidth - kSingleButtonWidth) * 0.5, _alertHeight - kButtonBottomOffset - kButtonHeight*3 -kButtonLineWidth*2, kSingleButtonWidth, kButtonHeight);
-            self.oneButton = [UIButton buttonWithType:UIButtonTypeSystem];
+            self.oneButton = [UIButton buttonWithType:UIButtonTypeCustom];
             self.oneButton.frame = oneButtonFrame;
             [self.oneButton addTarget:self action:@selector(oneButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:self.oneButton];
             
             
             twoButtonFrame = CGRectMake((kAlertWidth - kSingleButtonWidth) * 0.5, _alertHeight - kButtonBottomOffset - kButtonHeight*2 -kButtonLineWidth, kSingleButtonWidth, kButtonHeight);
-            self.twoButton = [UIButton buttonWithType:UIButtonTypeSystem];
+            self.twoButton = [UIButton buttonWithType:UIButtonTypeCustom];
             self.twoButton.frame = twoButtonFrame;
             [self.twoButton addTarget:self action:@selector(twoButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:self.twoButton];
             
             
             threeButtonFrame = CGRectMake((kAlertWidth - kSingleButtonWidth) * 0.5, _alertHeight - kButtonBottomOffset - kButtonHeight, kSingleButtonWidth, kButtonHeight);
-            self.threeButton = [UIButton buttonWithType:UIButtonTypeSystem];
+            self.threeButton = [UIButton buttonWithType:UIButtonTypeCustom];
             self.threeButton.frame = threeButtonFrame;
             [self.threeButton addTarget:self action:@selector(threeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:self.threeButton];
@@ -166,8 +173,8 @@
             
             oneButtonFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomOffset) * 0.5, _alertHeight - kButtonBottomOffset - kButtonHeight, kCoupleButtonWidth, kButtonHeight);
             twoButtonFrame = CGRectMake(CGRectGetMaxX(oneButtonFrame) + kButtonBottomOffset, _alertHeight - kButtonBottomOffset - kButtonHeight, kCoupleButtonWidth, kButtonHeight);
-            self.oneButton = [UIButton buttonWithType:UIButtonTypeSystem];
-            self.twoButton = [UIButton buttonWithType:UIButtonTypeSystem];
+            self.oneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            self.twoButton = [UIButton buttonWithType:UIButtonTypeCustom];
             self.oneButton.frame = oneButtonFrame;
             self.twoButton.frame = twoButtonFrame;
             
@@ -202,7 +209,7 @@
             _alertHeight = rect.size.height + kTitleHeight +kTitleYOffset +kButtonHeight +kButtonBottomOffset;
             
             oneButtonFrame = CGRectMake((kAlertWidth - kSingleButtonWidth) * 0.5, _alertHeight - kButtonBottomOffset - kButtonHeight, kSingleButtonWidth, kButtonHeight);
-            self.oneButton = [UIButton buttonWithType:UIButtonTypeSystem];
+            self.oneButton = [UIButton buttonWithType:UIButtonTypeCustom];
             self.oneButton.frame = oneButtonFrame;
             
             [self.oneButton addTarget:self action:@selector(oneButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -213,8 +220,20 @@
             divisionLine.backgroundColor = [UIColor colorWithRed:178/255.0 green:178/255.0 blue:178/255.0 alpha:1];
             divisionLine.frame = CGRectMake(oneButtonFrame.origin.x, oneButtonFrame.origin.y, oneButtonFrame.size.width, 0.5);
             [self addSubview:divisionLine];
+            
         }
+        
+        
+        
 
+        [self.oneButton setTitleColor:RGB(25, 94, 255) forState:UIControlStateNormal];
+        [self.twoButton setTitleColor:RGB(25, 94, 255) forState:UIControlStateNormal];
+        [self.threeButton setTitleColor:RGB(25, 94, 255) forState:UIControlStateNormal];
+
+        [self.oneButton setBackgroundImage:[UIImage imageWithColor:RGB(208, 208, 208)] forState:UIControlStateHighlighted];
+        [self.twoButton setBackgroundImage:[UIImage imageWithColor:RGB(208, 208, 208)] forState:UIControlStateHighlighted];
+        [self.threeButton setBackgroundImage:[UIImage imageWithColor:RGB(208, 208, 208)] forState:UIControlStateHighlighted];
+        
         [self.oneButton setTitle:oneTitle forState:UIControlStateNormal];
         [self.twoButton setTitle:twoTitle forState:UIControlStateNormal];
         [self.threeButton setTitle:threeTitle forState:UIControlStateNormal];

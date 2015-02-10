@@ -17,6 +17,7 @@
 
 
 -(id)initWithTitle:(NSString *)title
+       dismissBool:(Boolean)boo
        contentText:(NSString *)content
     oneButtonTitle:(NSString *)oneTitle
     twoButtonTitle:(NSString *)twoTitle
@@ -32,8 +33,6 @@
 
 - (void)handleThreeButton:(dispatch_block_t)threeBlock;
 @end
-
-
 
 
 
